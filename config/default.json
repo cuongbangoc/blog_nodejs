@@ -9,5 +9,6 @@
         "database": "blog_codeto",
         "user": "blog",
         "password": "123456"
-    }
+    },
+    "salt": 10
 }

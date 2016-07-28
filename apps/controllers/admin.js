@@ -3,6 +3,8 @@ var router = express.Router();
 
 var user_md = require("../models/user");
 
+var helper = require("../helpers/helper");
+
 router.get("/", function(req, res){
     res.json({"message": "This is Admin Page"});
 });
@@ -23,22 +25,29 @@ router.post("/signup", function(req, res){
     }
 
     // Insert to DB
+    var password = helper.hash_password(user.passwd);
+
     user = {
         email: user.email,
-        password: user.passwd,
+        password: password,
         first_name: user.firstname,
         last_name: user.lastname
     };
 
     var result = user_md.addUser(user);
 
-    if(!result){
-        res.render("signup", {data: {error: "Could not insert user data to DB"}});
-    }else{
+    result.then(function(data){
         res.json({message: "Insert success"});
-    }
+    }).catch(function(err){
+        console.log(err);
+        res.render("signup", {data: {error: "error"}});
+    });
 
-
+    // if(result){
+    //     res.json({message: "Insert success"});
+    // }else{
+    //     res.render("signup", {data: {error: "err"}});
+    // }
 
 });
 
