@@ -37,18 +37,47 @@ router.post("/signup", function(req, res){
     var result = user_md.addUser(user);
 
     result.then(function(data){
-        res.json({message: "Insert success"});
+        res.redirect("/admin/signin");
     }).catch(function(err){
         console.log(err);
         res.render("signup", {data: {error: "error"}});
     });
 
-    // if(result){
-    //     res.json({message: "Insert success"});
-    // }else{
-    //     res.render("signup", {data: {error: "err"}});
-    // }
+});
+
+router.get("/signin", function(req, res){
+    res.render("signin", {data: {}});
+});
+
+router.post("/signin", function(req, res){
+    var params = req.body;
+
+    if(params.email.trim().length == 0){
+        res.render("signin", {data: {error: "Please enter an email"}});
+    }else{
+        var data = user_md.getUserByEmail(params.email);
+
+        if(data){
+            data.then(function(users){
+                var user = users[0];
+
+                var status = helper.compare_password(params.password, user.password);
+
+                if(!status){
+                    res.render("signin", {data: {error: "Password Wrong"}});
+                }else{
+                    req.session.user = user;
+                    console.log(req.session.user);
+                    res.redirect("/admin/");
+                }
+            });
+        }else{
+            res.render("signin", {data: {error: "User not exists"}});
+        }
+    }
 
 });
 
 module.exports = router;
+
+

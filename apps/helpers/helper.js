@@ -10,6 +10,12 @@ function hash_password(password){
     return hash;
 }
 
+function compare_password(password, hash){
+    return bcrypt.compareSync(password, hash);
+}
+
+
 module.exports = {
-    hash_password: hash_password
+    hash_password: hash_password,
+    compare_password: compare_password
 }
