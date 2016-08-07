@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Tech Blog</title>
+    <title> <%if(data && data.post){%> <%= data.post.title%> <%}%></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/static/theme/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -66,50 +66,34 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('/static/theme/img/home-bg.jpg')">
+    <header class="intro-header" style="background-image: url('/static/theme/img/post-bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="site-heading">
-                        <h1>Tech blog</h1>
-                        <hr class="small">
-                        <span class="subheading"> The most technology for you</span>
+                    <%if(data && data.post){%>
+                    <div class="post-heading">
+                        <h1>
+                             <%= data.post.title%>
+                        </h1>
+                        <!-- <h2 class="subheading">Problems look mighty small from 150 miles up</h2> -->
+                        <span class="meta">Posted by <a href="#"><%= data.post.author%></a> on <%= data.post.created_at%></span>
                     </div>
+                    <%}%>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <% if (data && data.posts){%>
-                    <% for(var i = 0; i <  data.posts.length; i++){%>
-                        <div class="post-preview">
-                            <a href="/blog/post/<%= data.posts[i].id%>">
-                                <h2 class="post-title">
-                                    <%= data.posts[i].title%>
-                                </h2>
-                                <h3 class="post-subtitle">
-                                    <%- data.posts[i].content%>
-                                </h3>
-                            </a>
-                            <p class="post-meta">Posted by <a href="#"><%= data.posts[i].author%></a> on <%= data.posts[i].created_at%></p>
-                        </div>
-                        <hr>
-                    <%}%>
-                <%}%>
-
-                <!-- Pager -->
-                <!-- <ul class="pager">
-                    <li class="next">
-                        <a href="#">Older Posts &rarr;</a>
-                    </li>
-                </ul> -->
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <%- data.post.content%>
+                </div>
             </div>
         </div>
-    </div>
+    </article>
 
     <hr>
 
