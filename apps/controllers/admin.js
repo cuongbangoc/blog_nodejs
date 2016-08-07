@@ -154,6 +154,23 @@ router.get("/post/edit/:id", function(req, res){
     }
 });
 
+router.put("/post/edit", function(req, res){
+    var params = req.body;
+
+    data = post_md.updatePost(params);
+
+    if(!data){
+        res.json({status_code: 500});
+    }else{
+        data.then(function(result){
+            res.json({status_code: 200});
+        }).catch(function(err){
+            res.json({status_code: 500});
+        });
+    }
+});
+
+
 module.exports = router;
 
 

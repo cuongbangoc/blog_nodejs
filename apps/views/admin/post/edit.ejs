@@ -24,10 +24,12 @@
                         </div>
                         <%}%>
 
-                        <form role="form" method="POST" action="/admin/post/new">
+                        <form role="form" method="" action="">
+                            <input class="id" type="hidden" name="id" value="<% if (data && data.post){%><%= data.post.id%><%}%>">
+
                             <div class="form-group">
                                 <label>Title</label>
-                                <input class="form-control" name="title" placeholder="Title" value="<% if (data && data.post){%><%= data.post.title%><%}%>">
+                                <input class="form-control title" name="title" placeholder="Title" value="<% if (data && data.post){%><%= data.post.title%><%}%>">
                             </div>
                             <div class="form-group">
                                 <label>Content</label>
@@ -35,10 +37,10 @@
                             </div>
                             <div class="form-group">
                                 <label>Author</label>
-                                <input class="form-control" name="author" placeholder="Author" value="<% if (data && data.post){%><%= data.post.author%><%}%>">
+                                <input class="form-control author" name="author" placeholder="Author" value="<% if (data && data.post){%><%= data.post.author%><%}%>">
                             </div>
 
-                            <input type="button" name="" value="Add" class="btn btn-success" />
+                            <input type="button" name="" value="Edit" class="btn btn-success post_edit" />
                         </form>
                     </div>
                     <!-- /.col-lg-6 (nested) -->
@@ -48,6 +50,8 @@
             <!-- /.panel-body -->
         </div>
     </div>
+
+    <script type="text/javascript" src="/static/js/post.js"></script>
 
 </body>
 </html>

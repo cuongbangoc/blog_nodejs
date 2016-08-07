@@ -49,11 +49,30 @@ function getPostByID(id){
     return defer.promise;
 }
 
+function updatePost(params){
+    if(params){
+        var defer = q.defer();
+
+        var query = conn.query('UPDATE posts SET title = ?, content = ?, author = ?, updated_at = ? WHERE id = ?', [params.title, params.content, params.author, new Date(), params.id], function(err, result) {
+            if(err){
+                defer.reject(err);
+            }else{
+                defer.resolve(result);
+            }
+        });
+
+        return defer.promise;
+    }
+
+    return false;
+}
+
 
 module.exports = {
     getAllPosts: getAllPosts,
     addPost: addPost,
-    getPostByID: getPostByID
+    getPostByID: getPostByID,
+    updatePost: updatePost
 }
 
 
