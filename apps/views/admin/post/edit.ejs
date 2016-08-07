@@ -13,7 +13,7 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                Add new Post
+                Edit Post
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -27,18 +27,18 @@
                         <form role="form" method="POST" action="/admin/post/new">
                             <div class="form-group">
                                 <label>Title</label>
-                                <input class="form-control" name="title" placeholder="Title">
+                                <input class="form-control" name="title" placeholder="Title" value="<% if (data && data.post){%><%= data.post.title%><%}%>">
                             </div>
                             <div class="form-group">
                                 <label>Content</label>
-                                <textarea class="form-control" name="content" placeholder="Content"></textarea>
+                                <textarea class="form-control" name="content" placeholder="Content"><% if (data && data.post){%><%= data.post.content%><%}%></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Author</label>
-                                <input class="form-control" name="author" placeholder="Author">
+                                <input class="form-control" name="author" placeholder="Author" value="<% if (data && data.post){%><%= data.post.author%><%}%>">
                             </div>
 
-                            <input type="submit" name="" value="Add" class="btn btn-success" />
+                            <input type="button" name="" value="Add" class="btn btn-success" />
                         </form>
                     </div>
                     <!-- /.col-lg-6 (nested) -->

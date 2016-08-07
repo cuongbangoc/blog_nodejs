@@ -98,21 +98,60 @@ router.get("/post/new", function(req, res){
 router.post("/post/new", function(req, res){
     var params = req.body;
 
-    var now = new Date();
-    params.created_at = now;
-    params.updated_at = now;
-
-    var data = post_md.addPost(params);
-
-    data.then(function(result){
-        res.redirect("/admin");
-    }).catch(function(err){
+    if(params.title.trim().length == 0){
         var data = {
-            error: "Could not insert post"
+            error: "Please enter a title"
         };
 
         res.render("admin/post/new", {data: data});
-    });
+    }else{
+        var now = new Date();
+        params.created_at = now;
+        params.updated_at = now;
+
+        var data = post_md.addPost(params);
+
+        data.then(function(result){
+            res.redirect("/admin");
+        }).catch(function(err){
+            var data = {
+                error: "Could not insert post"
+            };
+
+            res.render("admin/post/new", {data: data});
+        });
+    }
+});
+
+router.get("/post/edit/:id", function(req, res){
+    var params = req.params;
+    var id = params.id;
+
+    var data = post_md.getPostByID(id);
+
+    if(data){
+        data.then(function(posts){
+            var post = posts[0];
+            var data = {
+                post: post,
+                error: false
+            };
+
+            res.render("admin/post/edit", {data: data});
+        }).catch(function(err){
+            var data = {
+                error: "Could not get Post by ID"
+            };
+
+            res.render("admin/post/edit", {data: data});
+        });
+    }else{
+        var data = {
+            error: "Could not get Post by ID"
+        };
+
+        res.render("admin/post/edit", {data: data});
+    }
 });
 
 module.exports = router;

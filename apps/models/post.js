@@ -35,9 +35,25 @@ function addPost(params){
     return false;
 }
 
+function getPostByID(id){
+    var defer = q.defer();
+
+    var query = conn.query('SELECT * FROM posts WHERE ?', {id: id}, function(err, posts) {
+        if(err){
+            defer.reject(err);
+        }else{
+            defer.resolve(posts);
+        }
+    });
+
+    return defer.promise;
+}
+
+
 module.exports = {
     getAllPosts: getAllPosts,
-    addPost: addPost
+    addPost: addPost,
+    getPostByID: getPostByID
 }
 
 
