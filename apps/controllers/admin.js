@@ -9,18 +9,23 @@ var helper = require("../helpers/helper");
 
 
 router.get("/", function(req, res){
-    // res.json({"message": "This is Admin Page"});
-    var data = post_md.getAllPosts();
-    data.then(function(posts){
-        var data = {
-            posts: posts,
-            error: false
-        };
+    if(req.session.user){
+        // res.json({"message": "This is Admin Page"});
+        var data = post_md.getAllPosts();
+        data.then(function(posts){
+            var data = {
+                posts: posts,
+                error: false
+            };
 
-        res.render("admin/dashboard", {data: data});
-    }).catch(function(err){
-        res.render("admin/dashboard", {data: {error: "Get Post data is Error"}});
-    });
+            res.render("admin/dashboard", {data: data});
+        }).catch(function(err){
+            res.render("admin/dashboard", {data: {error: "Get Post data is Error"}});
+        });
+    }else{
+        res.redirect("/admin/signin");
+    }
+
 
 });
 
@@ -94,7 +99,12 @@ router.post("/signin", function(req, res){
 });
 
 router.get("/post/new", function(req, res){
-    res.render("admin/post/new", {data: {error: false}});
+    if(req.session.user){
+        res.render("admin/post/new", {data: {error: false}});
+    }else{
+        res.redirect("/admin/signin");
+    }
+
 });
 
 router.post("/post/new", function(req, res){
@@ -126,34 +136,39 @@ router.post("/post/new", function(req, res){
 });
 
 router.get("/post/edit/:id", function(req, res){
-    var params = req.params;
-    var id = params.id;
+    if(req.session.user){
+        var params = req.params;
+        var id = params.id;
 
-    var data = post_md.getPostByID(id);
+        var data = post_md.getPostByID(id);
 
-    if(data){
-        data.then(function(posts){
-            var post = posts[0];
-            var data = {
-                post: post,
-                error: false
-            };
+        if(data){
+            data.then(function(posts){
+                var post = posts[0];
+                var data = {
+                    post: post,
+                    error: false
+                };
 
-            res.render("admin/post/edit", {data: data});
-        }).catch(function(err){
+                res.render("admin/post/edit", {data: data});
+            }).catch(function(err){
+                var data = {
+                    error: "Could not get Post by ID"
+                };
+
+                res.render("admin/post/edit", {data: data});
+            });
+        }else{
             var data = {
                 error: "Could not get Post by ID"
             };
 
             res.render("admin/post/edit", {data: data});
-        });
+        }
     }else{
-        var data = {
-            error: "Could not get Post by ID"
-        };
-
-        res.render("admin/post/edit", {data: data});
+        res.redirect("/admin/signin");
     }
+
 });
 
 router.put("/post/edit", function(req, res){
@@ -189,27 +204,37 @@ router.delete("/post/delete", function(req, res){
 });
 
 router.get("/post", function(req, res){
-    res.redirect("/admin");
+    if(req.session.user){
+        res.redirect("/admin");
+    }else{
+        res.redirect("/admin/signin");
+    }
+
 });
 
 
 router.get("/user", function(req, res){
-    var data = user_md.getAllUsers();
+    if(req.session.user){
+        var data = user_md.getAllUsers();
 
-    data.then(function(users){
-        var data = {
-            users: users,
-            error: false
-        };
+        data.then(function(users){
+            var data = {
+                users: users,
+                error: false
+            };
 
-        res.render("admin/user", {data: data});
-    }).catch(function(err){
-        var data = {
-            error: "Could not get user info"
-        };
+            res.render("admin/user", {data: data});
+        }).catch(function(err){
+            var data = {
+                error: "Could not get user info"
+            };
 
-        res.render("admin/user", {data: data});
-    });
+            res.render("admin/user", {data: data});
+        });
+    }else{
+        res.redirect("/admin/signin");
+    }
+
 });
 
 module.exports = router;
