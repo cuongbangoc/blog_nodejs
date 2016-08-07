@@ -6,6 +6,8 @@ var post_md = require("../models/post");
 
 var helper = require("../helpers/helper");
 
+
+
 router.get("/", function(req, res){
     // res.json({"message": "This is Admin Page"});
     var data = post_md.getAllPosts();
@@ -186,6 +188,29 @@ router.delete("/post/delete", function(req, res){
     }
 });
 
+router.get("/post", function(req, res){
+    res.redirect("/admin");
+});
+
+
+router.get("/user", function(req, res){
+    var data = user_md.getAllUsers();
+
+    data.then(function(users){
+        var data = {
+            users: users,
+            error: false
+        };
+
+        res.render("admin/user", {data: data});
+    }).catch(function(err){
+        var data = {
+            error: "Could not get user info"
+        };
+
+        res.render("admin/user", {data: data});
+    });
+});
 
 module.exports = router;
 
