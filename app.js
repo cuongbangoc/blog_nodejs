@@ -3,6 +3,8 @@ var config = require("config");
 var bodyParser = require("body-parser");
 var session = require("express-session");
 
+var socketio = require("socket.io");
+
 var app = express();
 
 // body parser
@@ -31,6 +33,17 @@ app.use(controllers);
 var host = config.get("server.host");
 var port = config.get("server.port");
 
-app.listen(port, host,  function(){
+var server = app.listen(port, host,  function(){
     console.log("Server is running on port ", port);
+});
+
+
+var io = socketio(server);
+
+io.sockets.on('connection', function (socket) {
+    console.log("New user connected");
+
+    socket.on('disconnect', function(){
+        console.log('Comments - User disconnected');
+    });
 });
