@@ -29,16 +29,6 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript">
-        var socket = io('http://localhost:3000');
-            socket.on('news', function (data) {
-                console.log(data);
-                socket.emit('my other event', { my: 'data' });
-            });
-    </script>
-
-
 </head>
 
 <body>

@@ -40,10 +40,3 @@ var server = app.listen(port, host,  function(){
 
 var io = socketio(server);
 
-io.sockets.on('connection', function (socket) {
-    console.log("New user connected");
-
-    socket.on('disconnect', function(){
-        console.log('Comments - User disconnected');
-    });
-});
