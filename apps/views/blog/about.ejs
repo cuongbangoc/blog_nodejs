@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Tech Blog</title>
+    <title>Tech Blog - About</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/static/theme/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -54,9 +54,6 @@
                     <li>
                         <a href="/blog/about">About</a>
                     </li>
-                   <!--  <li>
-                        <a href="contact.html">Contact</a>
-                    </li> -->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -66,14 +63,14 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('/static/theme/img/home-bg.jpg')">
+    <header class="intro-header" style="background-image: url('/static/theme/img/about-bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="site-heading">
-                        <h1>Tech blog</h1>
+                    <div class="page-heading">
+                        <h1>About Me</h1>
                         <hr class="small">
-                        <span class="subheading"> The most technology for you</span>
+                        <span class="subheading">This is what I do.</span>
                     </div>
                 </div>
             </div>
@@ -84,29 +81,11 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <% if (data && data.posts){%>
-                    <% for(var i = 0; i <  data.posts.length; i++){%>
-                        <div class="post-preview">
-                            <a href="/blog/post/<%= data.posts[i].id%>">
-                                <h2 class="post-title">
-                                    <%= data.posts[i].title%>
-                                </h2>
-                                <h3 class="post-subtitle">
-                                    <%- data.posts[i].content%>
-                                </h3>
-                            </a>
-                            <p class="post-meta">Posted by <a href="#"><%= data.posts[i].author%></a> on <%= data.posts[i].created_at%></p>
-                        </div>
-                        <hr>
-                    <%}%>
-                <%}%>
+                <p>My name is Cuong Ba (Cuong Ba Ngoc), you may call me Cuong. I am a Software Engineer and I improving my skills to become a full-stack developer. Now, I working as Web Developer in Ha Noi, Viet Nam. I like to share and be shared knowledge and experiences with other people, because it is the way quickly to improve myself.
+                </p>
 
-                <!-- Pager -->
-                <!-- <ul class="pager">
-                    <li class="next">
-                        <a href="#">Older Posts &rarr;</a>
-                    </li>
-                </ul> -->
+                <p>I graduated from Post and Telecommunication Institute of Technology with a Engineering Software degree. I very like studying new technologies and special is open-source platform. I have many loves for Linux, Git, Python, Java and all linux-based technologies.
+                </p>
             </div>
         </div>
     </div>
