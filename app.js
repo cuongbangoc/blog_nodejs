@@ -40,3 +40,6 @@ var server = app.listen(port, host,  function(){
 
 var io = socketio(server);
 
+var socketcontrol = require("./apps/common/socketcontrol")(io);
+
+
