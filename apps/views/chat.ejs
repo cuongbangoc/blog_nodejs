@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Application</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body { font: 13px Helvetica, Arial; }
+          form { background: #000; padding: 3px; position: fixed; bottom: 10px; width: 90%; }
+          form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+          #conversation { list-style-type: none; margin: 0; padding: 0; }
+          #conversation li { padding: 5px 10px; }
+          #conversation li:nth-child(odd) { background: #eee; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul id="conversation">
+
+        </ul>
+
+        <form>
+            <input type="text" name="message" id="message"/>
+            <button class="btn btn-success">Send</button>
+        </form>
+    </div>
+</body>
+</html>
